@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import { defaultTheme } from '../../styles/themes/default'
 
 type ContainerProps = {
-  variant: Styles.Button.Variant
+  variant: Styles.Variant
   fontSize: Styles.Font.Sizes
   fontWeight: Styles.Font.Weights
-  color: Styles.Button.Colors
+  color: Styles.Colors
 }
 
 type HoverBackgroundColors = {
-  [key in Styles.Button.Variant]: string
+  [key in Styles.Variant]: string
 }
 
 const hoverBackgroundColors: HoverBackgroundColors = {

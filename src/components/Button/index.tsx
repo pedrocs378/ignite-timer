@@ -3,8 +3,8 @@ import { ButtonHTMLAttributes } from 'react'
 import * as S from './styles'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: Styles.Button.Variant
-  color?: Styles.Button.Colors
+  variant?: Styles.Variant
+  color?: Styles.Colors
   fontSize?: Styles.Font.Sizes
   fontWeight?: Styles.Font.Weights
 }
