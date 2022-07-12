@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react'
 
-import * as S from './Button.styles'
+import * as S from './styles'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Styles.Button.Variant
