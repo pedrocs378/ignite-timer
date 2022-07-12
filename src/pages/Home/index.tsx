@@ -18,7 +18,7 @@ const newCycleFormValidationSchema = zod.object<NewCycleValidationSchema>({
   task: zod.string().min(1, 'Informe a tarefa'),
   minutesAmount: zod
     .number()
-    .min(5, 'O valor precisa ser maior ou igual a 5')
+    .min(1, 'O valor precisa ser maior ou igual a 1')
     .max(60, 'O valor precisa ser menor ou igual a 60'),
 })
 
@@ -30,6 +30,7 @@ type Cycle = {
   minutesAmount: number
   startDate: Date
   interruptedDate?: Date
+  finishedDate?: Date
 }
 
 export function Home() {
@@ -87,6 +88,7 @@ export function Home() {
     const seconds = String(secondsAmount).padStart(2, '0')
 
     return {
+      totalSeconds,
       seconds,
       minutes,
     }
@@ -95,14 +97,35 @@ export function Home() {
   useEffect(() => {
     if (activeCycle) {
       const interval = setInterval(() => {
-        setAmountSecondsPassed(
-          differenceInSeconds(new Date(), activeCycle.startDate),
+        const secondsPassed = differenceInSeconds(
+          new Date(),
+          activeCycle.startDate,
         )
+
+        if (secondsPassed > countdown.totalSeconds) {
+          setCycles((syclesState) => {
+            return syclesState.map((cycle) => {
+              if (cycle.id === activeCycle?.id) {
+                return {
+                  ...cycle,
+                  finishedDate: new Date(),
+                }
+              }
+
+              return cycle
+            })
+          })
+
+          setActiveCycle(null)
+          clearInterval(interval)
+        } else {
+          setAmountSecondsPassed(secondsPassed)
+        }
       }, 1000)
 
       return () => clearInterval(interval)
     }
-  }, [activeCycle])
+  }, [activeCycle, countdown.totalSeconds])
 
   useEffect(() => {
     if (activeCycle) {
@@ -139,7 +162,7 @@ export function Home() {
             type="number"
             placeholder="00"
             step={5}
-            min={5}
+            min={1}
             max={60}
             required
             disabled={!!activeCycle}
