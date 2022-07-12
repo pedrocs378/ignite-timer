@@ -30,6 +30,36 @@ export const FormContainer = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `
 
+const BaseInput = styled.input`
+  height: 2.5rem;
+  padding: 0 0.5rem;
+
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid ${({ theme }) => theme.colors['gray-500']};
+
+  color: ${({ theme }) => theme.colors['gray-100']};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+
+  &:focus {
+    box-shadow: none;
+    border-color: ${({ theme }) => theme.colors['green-500']};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors['gray-500']};
+  }
+`
+
+export const TaskInput = styled(BaseInput)`
+  flex: 1;
+`
+
+export const MinutesAmountInput = styled(BaseInput)`
+  width: 4rem;
+`
+
 export const CountdownContainer = styled.div`
   font-family: 'Roboto Mono', monospace;
   font-size: 10rem;
