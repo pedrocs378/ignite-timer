@@ -50,6 +50,11 @@ const BaseInput = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.colors['gray-500']};
   }
+
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
 `
 
 export const TaskInput = styled(BaseInput)`
