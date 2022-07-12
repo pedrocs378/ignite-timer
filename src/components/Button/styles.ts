@@ -10,7 +10,7 @@ export const Container = styled.button<ContainerProps>`
 
   height: 64px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.default};
 
   font-size: 16px;
   font-weight: 700;

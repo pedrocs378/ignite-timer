@@ -8,7 +8,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ variant = 'success', ...rest }: ButtonProps) {
   return (
-    <S.Container variant={variant} {...rest}>
+    <S.Container type="button" variant={variant} {...rest}>
       Enviar
     </S.Container>
   )

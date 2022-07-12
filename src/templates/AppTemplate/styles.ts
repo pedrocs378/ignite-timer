@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding: 2.5rem;
 
   background-color: ${({ theme }) => theme.colors['gray-800']};
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.default};
 
   display: flex;
   flex-direction: column;

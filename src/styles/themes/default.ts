@@ -40,4 +40,7 @@ export const defaultTheme = {
     /** 1.5rem: 24px */
     xl: '1.5rem',
   },
+  borderRadius: {
+    default: '8px',
+  },
 }
