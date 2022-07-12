@@ -20,13 +20,13 @@ export const defaultTheme = {
     'red-700': '#7A1921',
 
     'yellow-500': '#FBA94C',
-    warning: '#FBA94C'
+    warning: '#FBA94C',
   },
   fontWeights: {
     /** 400 */
     regular: 400,
     /** 700 */
-    bold: 700
+    bold: 700,
   },
   fontSizes: {
     /** 0.75rem: 12px */
@@ -39,5 +39,5 @@ export const defaultTheme = {
     lg: '1.125rem',
     /** 1.5rem: 24px */
     xl: '1.5rem',
-  }
+  },
 }
