@@ -6,7 +6,6 @@ import { useCycles } from '../../contexts/CyclesContext'
 import { Cycle } from '../../contexts/CyclesContext/types'
 
 import * as S from './styles'
-import { SmileySad } from 'phosphor-react'
 
 type CycleStatus = 'interrupted' | 'finished' | 'in_progress'
 
