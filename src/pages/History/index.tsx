@@ -2,7 +2,8 @@ import { useMemo } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
-import { Cycle, useCycles } from '../../contexts/CyclesContext'
+import { useCycles } from '../../contexts/CyclesContext'
+import { Cycle } from '../../contexts/CyclesContext/types'
 
 import * as S from './styles'
 
