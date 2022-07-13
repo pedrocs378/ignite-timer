@@ -6,6 +6,11 @@ import {
   useState,
 } from 'react'
 
+type StartNewCycleData = {
+  task: string
+  minutesAmount: number
+}
+
 export type Cycle = {
   id: string
   task: string
@@ -23,7 +28,7 @@ type CyclesContextData = {
   markCurrentCycleAsFinished: () => void
   markCurrentCycleAsInterrupted: () => void
   changeSecondsPassed: (value: number) => void
-  startNewCycle: (newCycle: Cycle) => void
+  startNewCycle: (data: StartNewCycleData) => void
 }
 
 type CyclesProviderProps = {
@@ -75,7 +80,13 @@ export function CyclesProvider({ children }: CyclesProviderProps) {
     setAmountSecondsPassed(value)
   }, [])
 
-  const startNewCycle = useCallback((newCycle: Cycle) => {
+  const startNewCycle = useCallback((data: StartNewCycleData) => {
+    const newCycle: Cycle = {
+      ...data,
+      id: String(new Date().getTime()),
+      startDate: new Date(),
+    }
+
     setCycles((state) => [...state, newCycle])
     setActiveCycle(newCycle)
     setAmountSecondsPassed(0)

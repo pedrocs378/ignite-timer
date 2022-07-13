@@ -3,7 +3,7 @@ import { HandPalm, Play } from 'phosphor-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 
-import { useCycles, Cycle } from '../../contexts/CyclesContext'
+import { useCycles } from '../../contexts/CyclesContext'
 
 import { Button } from '../../components/Button'
 import { NewCycleForm } from './components/NewCycleForm'
@@ -41,13 +41,7 @@ export function Home() {
   const { handleSubmit, watch, reset } = newCycleForm
 
   function handleCreateNewCycle(data: NewCycleFormData) {
-    const newCycle: Cycle = {
-      ...data,
-      id: String(new Date().getTime()),
-      startDate: new Date(),
-    }
-
-    startNewCycle(newCycle)
+    startNewCycle(data)
 
     reset()
   }
