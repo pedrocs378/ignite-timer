@@ -6,7 +6,7 @@ import * as S from './styles'
 
 export function NewCycleForm() {
   const { register } = useFormContext()
-  const { activeCycle } = useCycles()
+  const { activeCycle, cycles } = useCycles()
 
   return (
     <S.FormContainer>
@@ -20,10 +20,9 @@ export function NewCycleForm() {
       />
 
       <datalist id="task-suggestions">
-        <option value="Projeto 1" />
-        <option value="Projeto 2" />
-        <option value="Projeto 3" />
-        <option value="Teste" />
+        {cycles.map((cycle) => {
+          return <option key={cycle.id} value={cycle.task} />
+        })}
       </datalist>
 
       <label htmlFor="minutesAmount">durante</label>

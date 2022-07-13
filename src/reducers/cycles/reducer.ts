@@ -1,4 +1,5 @@
 import { produce } from 'immer'
+import { isEqual, isAfter } from 'date-fns'
 
 import { CycleAction, CyclesState } from '../../contexts/CyclesContext/types'
 
@@ -12,6 +13,20 @@ export function cyclesReducer(state: CyclesState, action: CycleAction) {
 
         if (actionCycle) {
           draft.cycles.push(actionCycle)
+          draft.cycles.sort((a, b) => {
+            const isStartDateEqual = isEqual(
+              new Date(a.startDate),
+              new Date(b.startDate),
+            )
+            const isStartDateAfter = isAfter(
+              new Date(a.startDate),
+              new Date(b.startDate),
+            )
+
+            if (isStartDateEqual || isStartDateAfter) return -1
+
+            return 1
+          })
           draft.activeCycle = actionCycle
         }
       })

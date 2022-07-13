@@ -7,6 +7,7 @@ import {
   useReducer,
   useState,
 } from 'react'
+import { differenceInSeconds } from 'date-fns'
 
 import { cyclesReducer } from '../../reducers/cycles/reducer'
 import {
@@ -22,7 +23,6 @@ import {
   CyclesProviderProps,
   StartNewCycleData,
 } from './types'
-import { differenceInSeconds } from 'date-fns'
 
 const CyclesContext = createContext({} as CyclesContextData)
 
