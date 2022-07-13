@@ -39,10 +39,13 @@ export function History() {
     }
 
     return cycles.map((cycle) => {
-      const formattedStartDate = formatDistanceToNow(cycle.startDate, {
-        locale: ptBR,
-        addSuffix: true,
-      })
+      const formattedStartDate = formatDistanceToNow(
+        new Date(cycle.startDate),
+        {
+          locale: ptBR,
+          addSuffix: true,
+        },
+      )
 
       const status = getStatus(cycle)
 

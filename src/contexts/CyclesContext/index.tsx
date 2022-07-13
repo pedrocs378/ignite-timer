@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
   useState,
@@ -21,16 +22,40 @@ import {
   CyclesProviderProps,
   StartNewCycleData,
 } from './types'
+import { differenceInSeconds } from 'date-fns'
 
 const CyclesContext = createContext({} as CyclesContextData)
 
 export function CyclesProvider({ children }: CyclesProviderProps) {
-  const [cyclesState, dispatch] = useReducer(cyclesReducer, {
-    cycles: [],
-    activeCycle: undefined,
-  } as CyclesState)
+  const [cyclesState, dispatch] = useReducer(
+    cyclesReducer,
+    {
+      cycles: [],
+      activeCycle: undefined,
+    } as CyclesState,
+    (arg) => {
+      const storagedState = localStorage.getItem(
+        '@ignite-timer:cyclesState-1.0.0',
+      )
 
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
+      if (storagedState) {
+        return JSON.parse(storagedState) as CyclesState
+      }
+
+      return arg
+    },
+  )
+
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+    if (cyclesState.activeCycle) {
+      return differenceInSeconds(
+        new Date(),
+        new Date(cyclesState.activeCycle.startDate),
+      )
+    }
+
+    return 0
+  })
 
   const markCurrentCycleAsFinished = useCallback(() => {
     dispatch(finishCycleAction())
@@ -55,6 +80,12 @@ export function CyclesProvider({ children }: CyclesProviderProps) {
 
     setAmountSecondsPassed(0)
   }, [])
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cyclesState)
+
+    localStorage.setItem('@ignite-timer:cyclesState-1.0.0', stateJSON)
+  }, [cyclesState])
 
   const valueMemo: CyclesContextData = useMemo(() => {
     return {
