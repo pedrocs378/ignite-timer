@@ -7,7 +7,12 @@ import {
   useState,
 } from 'react'
 
-import { ActionTypes, cyclesReducer } from '../../reducers/cycles'
+import { cyclesReducer } from '../../reducers/cycles/reducer'
+import {
+  addNewCycleAction,
+  finishCycleAction,
+  interruptCycleAction,
+} from '../../reducers/cycles/actions'
 
 import {
   Cycle,
@@ -28,15 +33,11 @@ export function CyclesProvider({ children }: CyclesProviderProps) {
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
   const markCurrentCycleAsFinished = useCallback(() => {
-    dispatch({
-      type: ActionTypes.FINISH,
-    })
+    dispatch(finishCycleAction())
   }, [])
 
   const markCurrentCycleAsInterrupted = useCallback(() => {
-    dispatch({
-      type: ActionTypes.INTERRUPT,
-    })
+    dispatch(interruptCycleAction())
   }, [])
 
   const changeSecondsPassed = useCallback((value: number) => {
@@ -50,12 +51,7 @@ export function CyclesProvider({ children }: CyclesProviderProps) {
       startDate: new Date(),
     }
 
-    dispatch({
-      type: ActionTypes.START_NEW_CYCLE,
-      payload: {
-        data: newCycle,
-      },
-    })
+    dispatch(addNewCycleAction(newCycle))
 
     setAmountSecondsPassed(0)
   }, [])

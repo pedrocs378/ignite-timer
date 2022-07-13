@@ -1,10 +1,6 @@
-import { CycleAction, CyclesState } from '../contexts/CyclesContext/types'
+import { CycleAction, CyclesState } from '../../contexts/CyclesContext/types'
 
-export enum ActionTypes {
-  START_NEW_CYCLE = 'START_NEW_CYCLE',
-  FINISH = 'FINISH',
-  INTERRUPT = 'INTERRUPT',
-}
+import { ActionTypes } from './actions'
 
 export function cyclesReducer(state: CyclesState, action: CycleAction) {
   switch (action.type) {
