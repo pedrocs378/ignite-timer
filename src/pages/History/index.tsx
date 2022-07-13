@@ -6,6 +6,7 @@ import { useCycles } from '../../contexts/CyclesContext'
 import { Cycle } from '../../contexts/CyclesContext/types'
 
 import * as S from './styles'
+import { SmileySad } from 'phosphor-react'
 
 type CycleStatus = 'interrupted' | 'finished' | 'in_progress'
 
@@ -73,20 +74,28 @@ export function History() {
           </thead>
 
           <tbody>
-            {normalizedCycles.map((cycle) => {
-              return (
-                <tr key={cycle.id}>
-                  <td>{cycle.task}</td>
-                  <td>{cycle.minutesAmount} minutos</td>
-                  <td>{cycle.formattedStartDate}</td>
-                  <td>
-                    <S.Status variant={STATUS_VARIANT[cycle.status]}>
-                      {STATUS_LABEL[cycle.status]}
-                    </S.Status>
-                  </td>
-                </tr>
-              )
-            })}
+            {!normalizedCycles.length ? (
+              <tr>
+                <td colSpan={4} className="no-tasks">
+                  Nenhuma tarefa cadastrada.
+                </td>
+              </tr>
+            ) : (
+              normalizedCycles.map((cycle) => {
+                return (
+                  <tr key={cycle.id}>
+                    <td>{cycle.task}</td>
+                    <td>{cycle.minutesAmount} minutos</td>
+                    <td>{cycle.formattedStartDate}</td>
+                    <td>
+                      <S.Status variant={STATUS_VARIANT[cycle.status]}>
+                        {STATUS_LABEL[cycle.status]}
+                      </S.Status>
+                    </td>
+                  </tr>
+                )
+              })
+            )}
           </tbody>
         </table>
       </S.HistoryList>

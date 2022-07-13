@@ -56,6 +56,11 @@ export const HistoryList = styled.div`
       &:last-child {
         padding-right: 1.5rem;
       }
+
+      &.no-tasks {
+        text-align: center;
+        vertical-align: middle;
+      }
     }
   }
 `

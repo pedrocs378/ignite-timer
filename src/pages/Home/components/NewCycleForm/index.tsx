@@ -20,7 +20,7 @@ export function NewCycleForm() {
       />
 
       <datalist id="task-suggestions">
-        {cycles.map((cycle) => {
+        {cycles.slice(0, 5).map((cycle) => {
           return <option key={cycle.id} value={cycle.task} />
         })}
       </datalist>
